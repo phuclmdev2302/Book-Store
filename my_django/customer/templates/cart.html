@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Giỏ hàng</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .cart-item img {
+      max-width: 100px;
+      margin-right: 20px;
+    }
+
+    .cart-item h3 {
+      margin: 0;
+      color: #555;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .cart-item p {
+      margin: 0;
+      color: #777;
+      margin-bottom: 5px;
+    }
+
+    .cart-item .total-price {
+      font-weight: bold;
+    }
+
+    .cart-item form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .cart-item form button {
+      padding: 8px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .cart-item form button[type="submit"] {
+      background-color: #dc3545;
+    }
+
+    .cart-item form button:hover {
+      background-color: #0056b3;
+    }
+
+    .cart-summary {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    .cart-summary p {
+      margin: 0;
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    .cart-summary a {
+      display: inline-block;
+      padding: 8px 15px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 3px;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .cart-summary a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Giỏ hàng</h1>
+    <ul>
+      {% for item in cart_items %}
+      <li>
+        <div class="cart-item">
+          <img src="{{ item.product.profile_picture.url }}" alt="{{ item.product.name }}">
+          <div>
+            <h3>{{ item.product.name }}</h3>
+            <p>Giá: {{ item.product.formatted_price }} đ</p>
+            <p>Số lượng: {{ item.quantity }}</p>
+            <p class="total-price">Tổng tiền: {{ item.formatted_total_price }} đ</p>
+            <form action="{% url 'remove_from_cart' item.product.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit">Xóa</button>
+            </form>
+            <form action="{% url 'product_detail' item.product.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit">Xem chi tiết sản phẩm</button>
+            </form>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="cart-summary">
+      <p>Tổng số lượng sản phẩm: {{ total_quantity }}</p>
+      <p>Tổng giá trị đơn hàng: {{ total_price }} đ</p>
+      <a href="{% url 'product_list' %}">Tiếp tục mua hàng</a>
+      <a href="{% url 'cart_summary' %}">Xem tóm tắt đơn hàng</a>
+    </div>
+  </div>

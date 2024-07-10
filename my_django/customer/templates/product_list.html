@@ -1,0 +1,488 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Danh sách sản phẩm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        #slide {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        #slide img {
+            width: 100%;
+            height: 350px;
+        }
+    
+        .contact-info {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info p {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .contact-info ul {
+            list-style-type: none;
+            padding: 0;
+            margin-left: 30px;
+        }
+        
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; 
+        }
+        
+        .contact-info li i {
+            margin-right: 10px;
+            font-size: 30px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .contact-info li a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 30px;
+            margin-left: 30px;
+        }
+        
+        .contact-info li strong {
+            margin-left: 30px;
+            font-size: 30px;
+        }
+    
+        .taikhoan {
+            position: fixed;
+            top: 0;
+            right: 10px;
+            margin: 10px;
+            color: black;
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    
+        .taikhoan:hover {
+            display: block;
+            background-color: #f2f2f2;
+        }
+    
+        .taikhoan a {
+            color: black;
+            text-decoration: none;
+        }
+    
+        .taikhoan i {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+
+        .danhmuc {
+            position: relative;
+            display: inline-block;
+            }
+        
+        .danhmuc button {
+            background-color: #fff;
+            color: #333;
+            border: none;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .danhmuc button i {
+            margin-right: 5px;
+        }
+        
+        .danhmuc .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        .danhmuc .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .danhmuc .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .danhmuc:hover .dropdown-content {
+            display: block;
+        }
+        
+        .custom-card {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .custom-card h2 {
+            color: #555;
+            margin-bottom: 5px;
+        }
+    
+        .custom-card p {
+            color: #777;
+            margin-bottom: 10px;
+        }
+        
+        .custom-card {
+            position: relative;
+            width: 200px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .custom-card a {
+            text-decoration: none;
+            color: #333;
+        }
+    
+        .custom-card a:hover {
+            text-decoration: underline;
+        }
+    
+        .custom-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+    
+        .custom-card h2 {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+    
+        .custom-card p {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    
+        .custom-card form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .custom-card label {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+    
+        .custom-card input[type="number"] {
+            width: 50px;
+            height: 30px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+            margin-right: 5px;
+        }
+    
+        .custom-card button[type="submit"] {
+            width: 80px;
+            height: 30px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+        }
+    
+        .custom-card button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    
+        form input[type="number"] {
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+        }
+    
+        .custom-card .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+    
+        .custom-card label {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+    
+        .custom-card input[type="number"] {
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+            margin-right: 5px;
+        }
+    
+        .custom-card button[type="submit"] {
+            width: 60px;
+            height: 30px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+        }
+    
+        .gio-hang {
+            position: fixed;
+            top: 0;
+            right: 10px;
+            margin: 10px;
+            color: black;
+            background-color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 16px; /* Adjust the font size as needed */
+        }
+    
+        .gio-hang:hover {
+            background-color: #f2f2f2;
+        }
+    
+        .gio-hang i {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+        
+        .product-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-block {
+            a {
+                text-decoration: none; /* Loại bỏ gạch chân */
+            }
+            a:hover {
+                text-decoration: underline; /* Tạo gạch chân khi di chuột qua */
+
+            }
+        }
+        
+        form {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 20px;
+        }
+
+        form input[type="number"],
+        form input[type="text"] {
+        width: 200px;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding: 10px;
+        font-size: 16px;
+        }
+
+        form button[type="submit"] {
+        width: 200px;
+        margin-left: 10px;
+        margin-right: 0;
+        padding: 10px;
+        font-size: 16px
+        }
+        
+        /* form tìm kiếm */
+        .search-bar {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .new-products-link {
+            padding: 5px 10px;
+            background-color: orange; /* Màu nền cam */
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            display: inline-block; /* Thêm thuộc tính này để không bị tràn ra ngoài */
+            max-width: 260px; 
+            overflow: hidden; /* Ẩn phần tràn ra ngoài */
+            text-overflow: ellipsis; /* Hiển thị dấu chấm (...) cho phần tràn ra ngoài */
+            white-space: nowrap; /* Ngăn không cho dòng chữ xuống dòng mới */
+        }
+        
+        .new-products-link:hover {
+            background-color: #ff6600; /* Màu nền cam khi hover */
+        }
+        
+        .search-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .search-input input[type="text"],
+        .search-input input[type="number"] {
+            width: 200px;
+            margin: 0;
+            padding: 5px;
+            font-size: 16px;
+        }
+        
+        .search-input button[type="submit"] {
+            padding: 5px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        
+        .search-inputs {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .search-inputs input[type="number"],
+        .search-inputs input[type="text"] {
+            width: 150px;
+            margin: 0;
+            padding: 5px;
+            font-size: 16px;
+        }
+        
+        .search-inputs button[type="submit"] {
+            padding: 5px;
+            font-size: 16px;
+        }
+        
+        .search-groups {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div id="slide">
+    <img src="https://img.freepik.com/free-vector/hand-drawn-book-club-twitter-header-template_23-2149753861.jpg"></div>
+    </div>
+        
+   <button class ="gio-hang" onclick="window.location.href='/cart'" style="margin-right: 190px;"><i class="fas fa-shopping-cart"></i> Giỏ hàng</button>
+
+   <div class="taikhoan">         
+    <a href="{% url 'logout' %}" class="logout-button"><i class="fas fa-user"></i> Đăng xuất
+
+</div>
+
+
+<div class="search-bar">
+    <a class="new-products-link" href="/new-products">Xem danh sách sản phẩm mới cập nhật</a>
+    <form action="{% url 'search_product_name' %}" method="GET">
+        <div class="search-input">
+            <input type="text" name="search_query" placeholder="Tìm kiếm theo tên sản phẩm">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    <form action="{% url 'search_products_price_supplier' %}" method="GET">
+        <div class="search-inputs">
+            <input type="number" name="min_price" placeholder="Giá thấp nhất">
+            <input type="number" name="max_price" placeholder="Giá cao nhất">
+            <input type="text" name="supplier" placeholder="Nhà cung cấp">
+        </div>
+        <button type="submit">Tìm kiếm</button>
+    </form>
+</div>
+
+
+    <div class="danhmuc">
+        <button onclick="toggleDropdown()"><i class="fas fa-bars"></i> Chọn danh mục</button>
+        <div class="dropdown-content">
+          {% for category in categories %}
+            <a href="{% url 'products_by_category' category.id %}">{{ category.name }}</a>
+          {% endfor %}
+        </div>
+    </div>
+   
+    <h2>Danh sách các sản phẩm của chúng tôi</h2>
+<div class="product-block">
+    {% for product in products %}
+    <div class="custom-card">
+        <a href="{% url 'product_detail' product.id %}">
+            <img src="{{ product.profile_picture.url }}" alt="{{ product.name }}">
+            <h2>{{ product.name }}</h2>
+            <p style="color: red;">Giá: {{ product.formatted_price }} &#x20AB;</p>
+        </a>
+        <form action="{% url 'add_to_cart' product.id %}" method="POST">
+            {% csrf_token %}
+            <label for="quantity">Số lượng:</label>
+            <div class="input-group">
+                <input type="number" id="quantity" name="quantity" value="1" min="1">
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="contact-info">
+    <p>Liên hệ với chúng tôi:</p>
+    <ul>
+        <li>
+         <i class="fa fa-map-marker" aria-hidden="true"></i>
+         <strong>107 KDC Phong Phú, Bình Chánh, TP HCM</strong>
+        </li>
+      <li>
+        <i class="fab fa-facebook"></i>
+        <a href="https://www.facebook.com/?locale=vi_VN">Lê Minh Phúc</a>
+      </li>
+      <li>
+        <i class="far fa-envelope"></i>
+        <a href="mailto:lephuc04b3@gmail.com">lephuc04b3@gmail.com</a>
+      </li>
+      <li>
+        <i class="fas fa-phone"></i>
+        <strong>0528661656</strong>
+      </li>
+      <li>
+        <i class="fas fa-fax"></i>
+        <strong>0123456789</strong>
+      </li>
+    </ul>
+</div>
+
+</body>

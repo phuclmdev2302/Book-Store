@@ -1,0 +1,51 @@
+<style>
+    .category-title {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+  
+    .product-block {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  
+    .custom-card {
+      width: 250px;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+  
+    .product-image {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+  
+    .product-name {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+  
+    .product-price {
+      font-size: 16px;
+    }
+  </style>
+  
+  <h2 class="category-title">Danh sách sản phẩm danh mục "{{ category.name }}"</h2>
+  
+  <div class="product-block">
+    {% for product in products %}
+      <div class="custom-card">
+        <a href="{% url 'product_detail' product.id %}">
+          <img class="product-image" src="{{ product.profile_picture.url }}" alt="{{ product.name }}">
+          <h3 class="product-name">{{ product.name }}</h3>
+          <p class="product-price">Giá: {{ product.formatted_price }} đ</p>
+        </a>
+      </div>
+    {% endfor %}
+  </div>

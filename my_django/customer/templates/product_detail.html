@@ -1,0 +1,42 @@
+<style>
+  .product-detail {
+  max-width: 600px;
+  margin: 10px auto;
+  padding: 60px;
+  background-color: #f5f5f5;
+  border: 1px solid #FFFF00;
+}
+
+.product-detail h1 {
+  font-size: 28px;
+  margin-bottom: 100px;
+  text-align: center;
+  color: crimson;
+}
+
+.product-detail h2 {
+  font-size: 20px;
+  margin-bottom: 5px;
+  vertical-align: right;
+}
+
+.product-detail .image-container {
+  vertical-align: right;
+  margin-left: 300px;
+}
+
+.product-detail .image-container img {
+  max-width: 300px;
+  height: auto;
+}
+</style>
+
+<div class="product-detail">
+  <h1>{{ product.name }}</h1>
+  <h2>Danh mục: {{ product.category }}</h2>
+  <h2>Nhà cung cấp: {{ product.supplier }}</h2>
+  <h2 class="price">Giá: {{ product.formatted_price }} đ</h2>
+  <div class="image-container">
+    <img src="{{ product.profile_picture.url }}" alt="{{ product.name }}">
+  </div>
+</div>

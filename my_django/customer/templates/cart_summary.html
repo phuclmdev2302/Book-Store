@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Giỏ hàng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .cart-summary {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cart-summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .cart-summary-price {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .cart-summary-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Giỏ hàng</h1>
+        <ul class="cart-summary">
+            <li class="cart-summary-item">
+                <p>Tổng giá:</p>
+                <span class="cart-summary-price">{{ total_price }} đ</span>
+            </li>
+            <li class="cart-summary-item">
+                <p>Tổng số mặt hàng:</p>
+                <span class="cart-summary-price">{{ total_quantity }}</span>
+            </li>
+        </ul>
+        <div class="cart-summary-actions">
+            <button onclick="window.location.href='/cart'">Tiếp tục mua hàng</button>
+        </div>
+    </div>
+</body>
+</html>
